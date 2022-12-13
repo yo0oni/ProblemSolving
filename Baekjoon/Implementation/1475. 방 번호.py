@@ -6,6 +6,7 @@ for i in range(len(n)) :
   if n[i] in ['6', '9'] :
     count['6'] += 1
   else :
+    print(count[n[i]])
     count[n[i]] += 1
 
 if count['6'] % 2 == 0:

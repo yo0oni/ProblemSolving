@@ -1,5 +1,3 @@
-# Rev(Rev(X) + Rev(Y))
-
 def Rev(number):
     reverse = int(''.join(list(map(str, number))[::-1]))
     return reverse
