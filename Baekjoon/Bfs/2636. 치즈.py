@@ -4,7 +4,7 @@ from collections import deque
 n,m = map(int,input().split())
 chz = []
 for i in range(n):
-    chz.append(list(map(int,input().split())))
+    chz.append(list(map(int,sys.stdin.readline().split().split())))
 
 dx = [1,-1,0,0]
 dy = [0,0,1,-1]

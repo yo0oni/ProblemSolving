@@ -1,7 +1,6 @@
 from collections import deque
 
 def bfs():
-    count = 0
     queue = deque([n])
     while queue:
         x = queue.popleft()
