@@ -1,28 +1,34 @@
-sujin = list(map(int,input()))
-# print(n)
-
-# 줄어들든 늘어나든 수열
 # n = 4 1 11109876532
-
-# 1. 재귀함수를 마치는 조건 필요
-# 2. 백트래킹에서의 한정 조건
-#   1) 이전 수보다 작으면 다음 수보다 커야함
-#   2) 이전 수보다 크면 다음 수보다 작아야함
-
-# 4 -> 1 -> 11 (X) 2-1 만족하지 않음
-# 4 -> 11 -> 1 or 10 (X) 2-2 만족하지 않음
-# 4 -> 1 (O) 11 -> 10 -> 9... (O)
-# 재귀함수를 마치는 조건: 인덱스 == 순열 길이
-
 
 # 백트래킹에서 필요한 것들
 # 입력값 n, 수열에 저장
 def backtracking(index, answer):
+
     # 인덱스 == 순열 길이면 종료
     if index == len(sujin):
-        return answer
+        print(*answer)
+        exit()
     # 50이하이기 때문에 무조건 두자릿수 보장
-    
+    # 한자리씩
+    number1 = int(sujin[index]) # 4, 1, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2
+    if not visited[number1]:
+        visited[number1] = True
+        answer.append(number1)
+        backtracking(index+1, answer)
+        visited[number1] = False
+        answer.pop()
 
-visited = [0] * (len(sugin)+1) # 중복 방지
+    # 두자리씩
+    if index+1 < len(sujin):
+        number2 = int(sujin[index:index+2])
+        if number2<=max_num and not visited[number2]:
+            visited[number2] = True
+            answer.append(number2)
+            backtracking(index+2, answer)
+            visited[number2] = False
+            answer.pop()
+
+sujin = input()
+max_num = len(sujin) if len(sujin) < 10 else 9 + (len(sujin) - 9) // 2
+visited = [0] * 51
 backtracking(0, [])

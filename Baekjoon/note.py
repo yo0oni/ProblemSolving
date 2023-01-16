@@ -1,26 +1,31 @@
-from collections import deque, defaultdict
+def dfs(index, arr):
+    if index == len(kriii):
+        print(*arr)
+        exit()
+
+    # 1자리수 check
+    num1 = int(kriii[index])
+    if not visited[num1]:
+        print(arr)
+        visited[num1] = True
+        arr.append(num1)
+        dfs(index + 1, arr)
+        visited[num1] = False
+        arr.pop()
+
+    # 2자리수 check
+    if index+1 < len(kriii):
+        num2 = int(kriii[index:index+2])
+        if num2 <= N and not visited[num2]:
+            visited[num2] = True
+            arr.append(num2)
+            dfs(index+2, arr)
+            visited[num2] = False
+            arr.pop()
 
 
-def bfs(start, visited):
-    if start == K:
-        return 0
-    q = deque()
-    q.append((N, 0))
-    visited[N] = True
-    
-    while q:
-        idx, time = q.popleft()
-        if idx == K:
-            return time
-        for pos in [idx*2, idx+1, idx-1]:
-            if 0 <= pos <= MAX and not visited[pos]:
-                visited[pos] = True
-                if pos == idx*2:
-                    q.appendleft((pos, time))
-                else:
-                    q.append((pos, time+1))
+kriii = input()
+N = len(kriii) if len(kriii) < 10 else 9 + (len(kriii) - 9) // 2
+visited = [0 for _ in range(N + 1)]
 
-N, K = map(int, input().split())
-MAX = 100000
-visited = [False] * (MAX+1)
-print(bfs(N, visited))
+dfs(0, [])
