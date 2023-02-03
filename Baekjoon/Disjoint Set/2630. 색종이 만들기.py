@@ -10,8 +10,8 @@ for _ in range(n):
 def check(x, y, n):
     global white, blue
     color = paper[x][y]
-    for i in range(x, x+n):
-        for j in range(y, y+n):
+    for i in range(x, x+n): # 0 8
+        for j in range(y, y+n): # 0 8
             if color != paper[i][j]:
                 check(x, y, n//2) # 0 0 4
                 check(x + n//2, y, n//2) # 4 0 4
