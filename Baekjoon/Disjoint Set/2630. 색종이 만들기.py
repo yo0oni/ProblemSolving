@@ -5,7 +5,6 @@ paper = []
 white = blue = 0
 for _ in range(n):
     paper.append(list(map(int, sys.stdin.readline().split())))
-# print(n, l)
 
 def check(x, y, n):
     global white, blue
