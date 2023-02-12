@@ -1,23 +1,35 @@
 import sys
 input = sys.stdin.readline
 
-N, M = map(int, input().split())
-budget = [int(input()) for _ in range(N)]
-l,r = min(budget), sum(budget)
-while l <= r:
-    m = (l+r)//2
-    now = m
-    draw = 1
+n, m = map(int, input().split())
+array = [int(input()) for _ in range(n)]
+low = min(array)
+high = sum(array)
+answer = sum(array)
 
-    for i in budget:
-        if now < i:
-            now = m
-            draw+=1
-        now -= i
+while low <= high:
+    mid = (low+high)//2 # 2001//2 == 1000
+    money = 0
+    count = 0
+    button = False
+
+    for now in array:
+        if mid - now < 0:
+            button = True
+            break
+        if money - now < 0:
+            money = mid
+            count+=1
+        money -= now
+
+    if not button:
+        if count > m:
+            low = mid + 1
+        else:
+            high = mid - 1
+            answer = min(mid, answer)
     
-    if draw > M or m < max(budget):
-        l = m+1
     else:
-        r = m-1
-        k = m
-print(k)
+        low = mid + 1
+        
+print(answer)
