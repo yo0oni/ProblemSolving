@@ -18,7 +18,6 @@ def union(a, b):
 n, m, k = map(int, input().split())
 money =[0] + list(map(int, input().split()))
 parent = [i for i in range(n + 1)]
-result = 0
 
 for i in range(m):
     friend1, friend2 = map(int, input().split())
@@ -28,7 +27,7 @@ set_ = set()
 result = 0
 for i in range(1, n + 1):
     if find(i) not in set_:
-        print(find(i), parent, money)
+        # print(find(i), parent, money)
         result += money[parent[i]]
         set_.add(parent[i])
 

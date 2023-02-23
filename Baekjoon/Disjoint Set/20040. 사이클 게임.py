@@ -23,6 +23,6 @@ for i in range(m):
     if find(a) == find(b):  # 사이클 발생시
         print(i + 1)
         break
-    union(a, b)  # 점 잇기
+    union(a, b)
 else:
     print(0)
