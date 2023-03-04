@@ -5,5 +5,3 @@ input = sys.stdin.readline
 n = int(input())
 num = list(map(int, input().split()))
 print(num)
-
-a = num[2]//num[1]
