@@ -1,15 +1,29 @@
 import sys
+input = sys.stdin.readline
 
-n = int(sys.stdin.readline())
-
+n = int(input())
 stack = []
-c_list = []
+result = []
+count = 0
+X = True
 
 for _ in range(n):
-    tmp = int(sys.stdin.readline())
-    for i in range(1, tmp+1):
-        if i not in stack and i not in c_list:
-            stack.append(i)
-            print('+')
-    c_list.append(stack.pop())
-    print('-')
+    num = int(input())
+
+    while count < num:
+        count += 1
+        stack.append(count)
+        result.append("+")
+
+    if stack[-1] == num:
+        stack.pop()
+        result.append("-")
+    else:
+        X = False
+        break
+
+if X == False:
+    print("NO")
+else:
+    for i in result:
+        print(i)          
