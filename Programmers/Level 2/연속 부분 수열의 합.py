@@ -1,7 +1,13 @@
 def solution(elements):
-    cycle = elements + elements
-    s = []
-    for i in range(len(elements)):
-        for j in range(len(elements)):
-            s.append(sum(cycle[i:i+j]))
-    return len(set(s))
+    answer = 0
+    numberSet = set()
+    
+    elementLen = len(elements)
+    elements = elements * 2
+    
+    for i in range(elementLen):
+        for j in range(elementLen):
+            numberSet.add(sum(elements[j:j+i+1]))
+            
+    answer = len(numberSet)
+    return answer
