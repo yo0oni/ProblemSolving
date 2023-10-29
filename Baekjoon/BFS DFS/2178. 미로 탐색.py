@@ -7,7 +7,7 @@ N, M = map(int, input().split())
 graph = []
 
 for _ in range(N):
-    graph.append(list(map(int, input())))
+    graph.append(list(map(int, input().rstrip())))
 
 def bfs(x, y):
     dx = [-1, 1, 0, 0] 
@@ -23,16 +23,7 @@ def bfs(x, y):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            # 범위 넘어가면 끝
-            if nx < 0 or nx >= N or ny < 0 or ny >= M:
-                continue
-            
-            # 0인경우 지나갈 수 없는 길
-            if graph[nx][ny] == 0:
-                continue
-            
-            # 이때만 가능! 지금까지 이동한 횟수 더한 후 이어서 계속하기
-            if graph[nx][ny] == 1:
+            if 0 <= nx < N and 0 <= ny < M and graph[nx][ny] == 1:
                 graph[nx][ny] = graph[x][y] + 1
                 queue.append((nx, ny))
         
