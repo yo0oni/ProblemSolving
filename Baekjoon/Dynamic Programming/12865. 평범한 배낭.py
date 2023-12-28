@@ -1,18 +1,18 @@
 import sys
 input = sys.stdin.readline
  
-N,K = map(int,input().split())
-items = []
+N, K = map(int,input().split())
+dp = [0] * (K+1)
 
 for _ in range(N):
-    w,v = map(int,input().split())
-    items.append((w,v))
+    W, V = [int(x) for x in input().split()]
+    if W > K:
+        continue
 
-dp = [0 for _ in range(K+1)]
-for item in items:
-    w,v = item
-    
-    for i in range(K,w-1,-1):
-        dp[i] = max(dp[i],dp[i-w]+v)
+    for j in range(K, 0, -1):
+        if W + j <= K and dp[j] != 0:
+            dp[j+W] = max(dp[j+W], dp[j] + V)
 
-print(dp[-1])
+    dp[W] = max(dp[W], V)
+
+print(max(dp))
