@@ -1,35 +1,45 @@
-import sys
 from collections import deque
+import sys
 input = sys.stdin.readline
 
-m, n = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(n)]
-q = deque()
+m, n, h = map(int, input().split())
+tomatos = []
+queue = deque([])
 
-for i in range(n):
-    for j in range(m):
-        if arr[i][j] == 1:
-            q.append([i, j])
+for i in range(h):
+    tomato = []
+    for j in range(n):
+        tomato.append(list(map(int, input().split())))
+        for k in range(m):
+            if tomato[j][k] == 1:
+                queue.append([i, j, k])
 
-dx, dy = [1, -1, 0, 0], [0, 0, 1, -1]
-while q:
-    x, y = q.popleft()
-    for i in range(4):
+    tomatos.append(tomato)
+
+dx = [-1, 1, 0, 0, 0, 0]
+dy = [0, 0, -1, 1, 0, 0]
+dz = [0, 0, 0, 0, -1, 1]
+
+while queue:
+    x, y, z = queue.popleft()
+
+    for i in range(6):
         nx = x + dx[i]
         ny = y + dy[i]
+        nz = z + dz[i]
 
-        if 0 <= nx < n and 0 <= ny < m:
-            if arr[nx][ny] == 0:
-                arr[nx][ny] = arr[x][y] + 1
-                q.append([nx, ny])
+        if 0 <= nx < h and 0 <= ny < n and 0 <= nz < m and tomatos[nx][ny][nz] == 0:
+            queue.append([nx, ny, nz])
+            tomatos[nx][ny][nz] = tomatos[x][y][z] + 1
 
-ans = 0
-for line in arr:
-    for tomato in line:
-        if tomato == 0:
-            print(-1)
-            exit()
+day = 0
+for i in tomatos:
+    for j in i:
+        for k in j:
+            if k == 0:
+                print(-1)
+                exit(0)
+                
+        day = max(day, max(j))
 
-    ans = max(ans, max(line))
-
-print(ans-1)
+print(day - 1)

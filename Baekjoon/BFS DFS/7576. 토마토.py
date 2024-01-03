@@ -24,8 +24,6 @@ while queue:
         ny = y+dy[i]
 
         if 0<=nx<n and 0<=ny<m:
-            if tomato[nx][ny] == -1:
-                continue
             if tomato[nx][ny] == 0:
                 queue.append((nx,ny))
                 tomato[nx][ny] = tomato[x][y]+1
