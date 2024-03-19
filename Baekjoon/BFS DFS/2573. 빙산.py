@@ -1,48 +1,66 @@
 import sys
 from collections import deque
+input = sys.stdin.readline
 
-n,m = map(int,input().split())
-ice = []
-for i in range(n):
-    ice.append(list(map(int,sys.stdin.readline().split())))
+def bfs(x, y):
+    q = deque([(x, y)])
+    visited[x][y] = True
+    seaList = []
 
-dx = [1,-1,0,0]
-dy = [0,0,1,-1]
-#
-# 다 녹았으면(두 덩어리로 나뉘는 게 불가능한 것이니까) 0을 출력하고 break
-# 1-2) 빙산이 다 녹지 않았으면 1년 더 (year에 1을 추가하고, melt())
+    while q:
+        x, y = q.popleft()
+        sea = 0
 
-def bfs(x_, y_):
-    dq = deque()
-    dq.append([x_,y_])
-    visited[x_][y_] = 1
-    # 동서남북이 0인게 하나라도 있으면 분리된 거임!!!!
-    while dq:
-        count = 0
-        x,y = dq.popleft()
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0<=nx<n and 0<=ny<m:
-                if ice[nx][ny] == 0:    # 빙산이 없는경우 +1 해준다
-                    minus[(x, y)] += 1
-                elif ice[nx][ny] != 0 and visited[nx][ny] == 0:  # 빙산인데 방문하지 않은경우 append시켜줌
-                    dq.append([nx,ny])
-                    visited[nx][ny] = 1
-                    
+
+            if 0 <= nx < n and 0 <= ny < m:
+                if not graph[nx][ny]: # 바다인 경우
+                    sea += 1
+                elif graph[nx][ny] and not visited[nx][ny]:
+                    q.append((nx, ny))
+                    visited[nx][ny] = True
+
+        if sea > 0:
+            seaList.append((x, y, sea))
+
+    for x, y, sea in seaList:
+        graph[x][y] = max(0, graph[x][y] - sea)
+
+    return 1
+
+
+n, m = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(n)]
+
+ice = []
+for i in range(n):
+    for j in range(m):
+        if graph[i][j]:
+            ice.append((i, j))
+
+dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
 year = 0
-while 1:
-    lump = 0
-    visited = [[0]*m for _ in range(n)]
-    for i in range(n):
-        for j in range(m):
-            if ice[i][j] != 0 and visited[i][j] == False:
-                bfs(i, j)
-                lump += 1
+
+while ice:
+    visited = [[False] * m for _ in range(n)]
+    delList = []
+    group = 0
+
+    for i, j in ice:
+        if graph[i][j] and not visited[i][j]: # 빙산인 경우
+            group += bfs(i, j)
+        if graph[i][j] == 0: # 탐색 후에 바다가 된 빙산을 체크
+            delList.append((i, j))
+
+    if group > 1:
+        print(year)
+        break
+
+    ice = sorted(list(set(ice) - set(delList)))
     year += 1
-    if lump >= 2:
-        print(year-1)
-        break
-    elif lump == 0:
-        print(0)
-        break
+
+if group < 2:
+    print(0)
