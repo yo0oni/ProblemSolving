@@ -1,27 +1,24 @@
 import sys
 input = sys.stdin.readline
 
-height, w = map(int, input().split())
-width = list(map(int,input().split()))
-count = 0
+h, w = map(int, input().split())
+height = list(map(int, input().split()))
+tallest_height = height.index(max(height))
 
-max_height = 0
-max_index = 0
-for i in range(w):
-    if max_height < width[i]:
-        max_height = width[i]
-        max_index = width.index(width[i])
+right_sum = 0
+right_height = height[0]
+for i in range(tallest_height):
+    if right_height > height[i+1]:
+        right_sum += right_height - height[i+1]
+    else:
+        right_height = height[i+1]
 
-# 왼쪽 그룹
-max_height = 0
-for i in range(max_index):
-    max_height = max(max_height, width[i])
-    count += max_height - width[i]
+left_sum = 0
+left_height = height[-1]
+for i in range(w, tallest_height, -1):
+    if left_height > height[i-1]:
+        left_sum += left_height - height[i-1]
+    else:
+        left_height = height[i-1]
 
-# 오른쪽 그룹
-max_height = 0
-for i in range(len(width)-1, max_index, -1):
-    max_height = max(max_height, width[i])
-    count += max_height - width[i]
-
-print(count)
+print(right_sum + left_sum)
