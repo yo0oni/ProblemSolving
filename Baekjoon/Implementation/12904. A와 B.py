@@ -1,17 +1,17 @@
-from sys import stdin
-input = stdin.readline
+import sys
+input = sys.stdin.readline
 
-S = list(input().rstrip())
-T = list(input().rstrip())
+s = input().strip()
+t = input().strip()
 
-while len(S) != len(T):
-    if T[-1] == "A":
-        T.pop()
-    else:
-        T.pop()
-        T = T[::-1]
+while len(t) > len(s):
+    if t[-1] == "A":
+        t = t[:-1]
+    elif t[-1] == "B":
+        t = t[:-1]
+        t = t[::-1]
 
-if S == T:
+if t == s:
     print(1)
 else:
     print(0)
