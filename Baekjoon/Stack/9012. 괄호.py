@@ -1,25 +1,20 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-
-for _ in range(N):
+n = int(input())
+for _ in range(n):
     stack = []
-    brackets = input()
-    
-    for bracket in brackets:
-        if bracket == "(":
-            stack.append(bracket)
+    strings = input().strip()
 
-        elif bracket == ")":
-            if stack and stack[-1] == "(":
-                stack.pop()
+    for string in strings:
+        if string == "(":
+            stack.append(string)
+        elif stack and string == ")" and stack[-1] == "(":
+            stack.pop()
+        else:
+            stack.append(string)
 
-            else:
-                stack.append(bracket)
-                
     if len(stack) != 0:
         print("NO")
-
     else:
         print("YES")

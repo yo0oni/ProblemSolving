@@ -1,9 +1,12 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
-score = list(map(int, input().split()))
-m = max(score)
-new_score = []
+average = list(map(int, input().split()))
+max_avg = max(average)
 
-for i in score:
-    new_score.append(i/m*100)
+new = []
+for avg in average:
+    new.append(avg/max_avg*100)
 
-print(sum(new_score)/n)
+print(sum(new)/len(new))
