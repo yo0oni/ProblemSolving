@@ -1,15 +1,15 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-ropes = []
-for _ in range(N):
-    ropes.append(int(input()))
+n = int(input())
+rope = []
+for _ in range(n):
+    rope.append(int(input()))
 
-ropes.sort(reverse=True)
-result = []
+rope.sort(reverse=True)
+max_weight = 0
+for i in range(n, 0, -1):
+    if rope[i-1] * i > max_weight:
+        max_weight = rope[i-1] * i
 
-for i in range(N):
-    result.append(ropes[i] * (i+1))
-
-print(max(result))
+print(max_weight)
