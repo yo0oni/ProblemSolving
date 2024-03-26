@@ -1,18 +1,15 @@
 import sys
 input = sys.stdin.readline
 
-numbers = input().strip().split("-")
-minus_numbers = []
+sics = list(input().strip().split("-"))
+numbers = []
+for sic in sics:
+    if "+" in sic:
+        numbers.append(sum(map(int, sic.split("+"))))
+        continue
+    numbers.append(int(sic))
 
-for number in numbers:
-    if "+" not in number:
-        minus_numbers.append(int(number))
-    else:
-        split_by_plus = map(int, number.split("+"))
-        minus_numbers.append(sum(split_by_plus))
-
-result = minus_numbers[0]
-for index in range(1, len(minus_numbers)):
-    result -= minus_numbers[index]
-
+result = numbers[0]
+for number in numbers[1:]:
+    result -= number
 print(result)
