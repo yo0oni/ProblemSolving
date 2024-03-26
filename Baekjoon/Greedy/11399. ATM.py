@@ -2,13 +2,13 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-arr = list(map(int, input().split()))
-arr.sort()
-time = 0
-sum = 0
+times = list(map(int, input().split()))
+times.sort()
 
-for num in arr:
-    time += num
-    sum += time
+answer = 0
+temp = 0
+for time in times:
+    answer += (temp + time)
+    temp += time
 
-print(sum)
+print(answer)

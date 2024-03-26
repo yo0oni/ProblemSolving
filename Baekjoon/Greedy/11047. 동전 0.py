@@ -2,20 +2,15 @@ import sys
 input = sys.stdin.readline
 
 n, k = map(int, input().split())
-coin = []
-count = 0
-
+coins = []
 for _ in range(n):
-    coin.append(int(input()))
+    coins.append(int(input()))
 
-coin.reverse()
-
-for index in range(n):
-    if k - coin[index] >= 0:
-        count += k // coin[index]
-        k = k % coin[index]
-    
-    if k == 0:
-        break
+coins.sort(reverse=True)
+count = 0
+for coin in coins:
+    if coin <= k:
+        count += (k // coin)
+        k %= coin
 
 print(count)
