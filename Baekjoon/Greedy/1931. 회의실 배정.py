@@ -2,18 +2,17 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-time = []
+times = []
 for _ in range(n):
     a, b = map(int, input().split())
-    time.append((a, b))
-
-time.sort(key = lambda x: (x[1], x[0]))
+    times.append((a, b, b-a))
+times.sort(key=lambda x:(x[1], x[0], x[2]))
 
 count = 1
-end_time = time[0][1] # 시작
-for index in range(1, len(time)):
-    if end_time <= time[index][0]:
+start = times[0][1]
+for index in range(len(times)-1):
+    if start <= times[index+1][0]:
+        start = times[index+1][1]
         count += 1
-        end_time = time[index][1]
-    
+
 print(count)
