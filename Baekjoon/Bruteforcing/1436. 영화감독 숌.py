@@ -1,13 +1,13 @@
 import sys
-
 input = sys.stdin.readline
 
 n = int(input())
-i = 1
-number = 666
-
-while i != n:
-    number += 1
-    if '666' in str(number):
-        i += 1
-print(number)
+sixs = []
+i = 0
+while n:
+    if "666" in str(i):
+        sixs.append(i)
+        n -= 1
+    i += 1
+    
+print(sixs[-1])
