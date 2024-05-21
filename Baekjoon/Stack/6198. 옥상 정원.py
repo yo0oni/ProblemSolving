@@ -16,6 +16,5 @@ for height in heights:
 
     total_count += len(stack)
     stack.append(height)
-    print(stack, height, len(stack))
 
 print(total_count)
