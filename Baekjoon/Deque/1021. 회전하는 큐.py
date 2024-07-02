@@ -1,24 +1,40 @@
+import sys
 from collections import deque
- 
-n , m = map(int, input().split())
-queue = deque()
- 
+input = sys.stdin.readline
+
+def delete_first(queue):
+    queue.popleft()
+
+def move_left(queue):
+    number = queue.popleft()
+    queue.append(number)
+
+def move_right(queue):
+    number = queue.pop()
+    queue.appendleft(number)
+
+n, m = map(int, input().split())
+numbers = deque()
+wants = deque(list(map(int, input().split())))
+count = 0
+
 for i in range(1, n+1):
-    queue.append(i)
- 
-arr = list(map(int, input().split()))
-cnt = 0
- 
-for i in arr:
-    while True:
-        if queue[0] == i:
-            queue.popleft()
-            break
+    numbers.append(i)
+
+while wants:
+    if numbers[0] == wants[0]:
+        delete_first(numbers)
+        delete_first(wants)
+    
+    else:
+        if numbers.index(wants[0]) <= abs(len(numbers) - numbers.index(wants[0]) - 1):
+            while numbers[0] != wants[0]:
+                move_left(numbers)
+                count += 1
+
         else:
-            if queue.index(i) <= len(queue) // 2:
-                queue.rotate(-1)
-                cnt += 1
-            else:
-                queue.rotate(1)
-                cnt += 1
-print(cnt)
+            while numbers[0] != wants[0]:
+                move_right(numbers)
+                count += 1
+
+print(count)
