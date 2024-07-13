@@ -1,30 +1,28 @@
 import sys
 input = sys.stdin.readline
 
-def diff(a, b):
-    asum, bsum = 0, 0
+n = int(input())
+board = [list(map(int, input().split())) for _ in range(n)]
+min_diff = 1e9
+
+def get_diff(start, link):
+    start_ability, link_ability = 0, 0
     for i in range(n//2):
         for j in range(n//2):
-            asum += board[a[i]][a[j]]
-            bsum += board[b[i]][b[j]]
+            start_ability += board[start[i]][start[j]]
+            link_ability += board[link[i]][link[j]]
+            
+    return abs(start_ability - link_ability)
 
-    return abs(asum - bsum)
+def dfs(player, start, link):
+    global min_diff
+    if player == n:
+        if len(start) == len(link):
+            min_diff = min(min_diff, get_diff(start, link))
+        return
+    
+    dfs(player+1, start+[player], link)
+    dfs(player+1, start, link+[player])
 
-def dfs(depth, a, b):
-    global answer
-    if depth == n:
-        if len(a) == len(b):
-            answer = min(answer, diff(a, b))
-        return answer
-
-    dfs(depth+1, a+[depth], b)
-    dfs(depth+1, a, b+[depth])
-
-n = int(input())
-board = []
-for _ in range(n):
-    board.append(list(map(int, input().split())))
-answer = 1e9
 dfs(0, [], [])
-
-print(answer)
+print(min_diff)
