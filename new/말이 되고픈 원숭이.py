@@ -15,7 +15,7 @@ visited = [[[False for _ in range(k+1)] for _ in range(w)] for _ in range(h)]
 
 
 def bfs(si, sj):
-    dq = deque([(si, sj, k, 0)]) # 앞의 0은 K 사용 횟수
+    dq = deque([(si, sj, k, 0)])
     visited[si][sj][k] = True
     
     while dq:
