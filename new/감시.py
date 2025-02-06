@@ -16,6 +16,7 @@ cctv_dirs = [
 def watch(temp_board, si, sj, directions):
     for d in directions:
         ci, cj = si, sj
+        
         while True:
             ci, cj = ci + di[d], cj + dj[d]
             if not (0 <= ci < n and 0 <= cj < m) or temp_board[ci][cj] == 6:
