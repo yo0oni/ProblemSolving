@@ -8,20 +8,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.StringTokenizer;
 
-public class Main {
+public class 게리맨더링 {
     static List<List<Integer>> graph = new ArrayList<>();       // 연결 여부
     static int[] population; // 인구수
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        String[] parr = br.readLine().split(" ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
         int answer = Integer.MAX_VALUE;
         
-        population = new int[parr.length+1];
+        population = new int[n+1];
         for (int i = 1; i < n+1; i ++) {
-            population[i] = Integer.parseInt(parr[i-1]);
+            population[i] = Integer.parseInt(st.nextToken());
         }
         
         for (int i = 0; i < n + 1; i++) {
@@ -29,11 +30,11 @@ public class Main {
         }
 
         for(int i = 1; i < n+1; i++) {
-            List<String> info = Arrays.asList(br.readLine().split(" "));
-            List<String> info_sub = info.subList(1, info.size());
+            st = new StringTokenizer(br.readLine());
+            int t = Integer.parseInt(st.nextToken());
 
-            for (String zone : info_sub) {
-                graph.get(i).add(Integer.valueOf(zone));
+            for (int j = 0; j < t; j ++) {
+                graph.get(i).add(Integer.a(st.nextToken()));
             }
         }
 
