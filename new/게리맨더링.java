@@ -33,7 +33,7 @@ public class 게리맨더링 {
             int t = Integer.parseInt(st.nextToken());
 
             for (int j = 0; j < t; j ++) {
-                graph.get(i).add(Integer.parseInt(st.nextToken()));
+                graph.get(i).add(Integer.valueOf(st.nextToken()));
             }
         }
 
