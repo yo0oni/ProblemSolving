@@ -1,3 +1,4 @@
+package Java.BOJ;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,7 +10,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class 게리맨더링 {
+public class BOJ17471 {
     static List<List<Integer>> graph = new ArrayList<>();       // 연결 여부
     static int[] population; // 인구수
 
